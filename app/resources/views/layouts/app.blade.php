@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Pizza Place</title>
-    <link  rel="icon"   href="img/pii.png" type="image/png" />
+    <link  rel="icon" href="{{ asset("img/pii.png") }}" type="image/png" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/img/favicon.png"/ >
+    <link rel="icon" type="image/png" href="{{ asset("img/favicon.png") }}" / >
 
     <!-- Compiled and minified CSS -->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-    <link rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="{{ asset("css/materialize.min.css") }}" media="screen,projection"/>
+    <link rel="stylesheet" href="{{ asset("css/styles.css") }}">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,10 +22,10 @@
             <nav class="green darken-1">
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">
-                        <img class="responsive-img" src="img/logo1.png" width="340">       
+                        <img class="responsive-img" src="{{ asset("img/logo1.png") }}" width="340">       
                     </a>
                     <ul class="right">
-                        <li><a href="login"><i class="material-icons" style="font-size: 35px;">highlight_off</i></a></li> 
+                        <li><a href="{{route('home')}}"><i class="material-icons" style="font-size: 35px;">highlight_off</i></a></li> 
                     </ul>
                 </div>
             </nav>
@@ -63,7 +63,7 @@
     </footer> 
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="{{ asset("js/materialize.min.js") }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();

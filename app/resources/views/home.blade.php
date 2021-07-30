@@ -3,6 +3,11 @@
 @section('content')
 <main>
         <div class="container">
+                @if( session('message') )
+                <div class="alert alert-{{session('type')}} alert-dismissible show">
+                    <strong>{{session('message')}}</strong>
+                </div>
+                @endif
             <div class="row">
                 <div class="col s12"><h4>Welcome Admin</h4></div>
                 <div class="col s12"><h6>What do you want to do?</h6></div>        
@@ -68,61 +73,28 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Username</th>
-                                            <th>Password</th>
                                             <th>Email</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
                                             <th>Role ID</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($users as $user)
                                         <tr>
-                                            <td>2</td>
-                                            <td>lizzymoon</td>
-                                            <td>liz123</td>
-                                            <td>lizzymoon@gmail.com</td>
-                                            <td>Elizabeth</td>
-                                            <td>Midford</td>
-                                            <td>1</td>
+                                            <td>{{$user->id}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->tipo}}</td>
                                             <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                             <td><a class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">delete</i></a></td>
                                         </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>davidbrowm</td>
-                                            <td>browm879</td>
-                                            <td>davidbrowm@gmail.com</td>
-                                            <td>David</td>
-                                            <td>Brown</td>
-                                            <td>2</td>
-                                            <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
-                                            <td><a class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">delete</i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>agnesdicat</td>
-                                            <td>450623</td>
-                                            <td>riagnesder@gmail.com</td>
-                                            <td>Agnes</td>
-                                            <td>Rider</td>
-                                            <td>
-                                                <div class="input-field col s12" style="text-align-last: center;">
-                                                    <select>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                    </select>
-                                                </div>
-                                            </td>
-                                            <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">save</i></a></td>
-                                            <td><a class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">delete</i></a></td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 <br>
                                 <div style="text-align:right; margin-right: 12px;">
-                                    <a class="waves-effect waves-light btn-small green darken-3"><i class="material-icons">person_add</i></a>
+                                    <a   href="{{route('users.create')}}" class="waves-effect waves-light btn-small green darken-3"><i class="material-icons">person_add</i></a>
                                 </div>
                             </div>
                         </div>
