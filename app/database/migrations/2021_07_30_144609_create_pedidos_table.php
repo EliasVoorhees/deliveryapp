@@ -16,14 +16,14 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nombre_cliente');
-            $table->integer('numero_contacto');
-            $table->foreignId('repartidor_id')->constrained('users');
-            $table->string('estado');
-            $table->dateTime('hora_entrega');
-            $table->decimal('total_precio');
-            $table->string('direccion');
-            $table->string('numero_pedido');
+            $table->string('nombre_cliente')->nullable();
+            $table->integer('numero_contacto')->nullable();
+        $table->foreignId('repartidor_id')->nullable()->unsigned()->constrained('users');
+            $table->string('estado')->nullable();
+            $table->dateTime('hora_entrega')->nullable();
+            $table->decimal('total_precio')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('numero_pedido')->nullable();
         });
     }
 

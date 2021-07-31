@@ -18,9 +18,9 @@ class CreatePedidoDetallesTable extends Migration
             $table->timestamps();
             $table->foreignId('producto_id')->constrained();
             $table->foreignId('pedido_id')->constrained();
-            $table->integer('cantidad');
-            $table->decimal('precio');
-            $table->string('comentarios');
+            $table->integer('cantidad')->nullable();
+            $table->decimal('precio')->nullable();
+            $table->string('comentarios')->nullable();
         });
     }
 

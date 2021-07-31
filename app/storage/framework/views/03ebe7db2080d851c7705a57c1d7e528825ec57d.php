@@ -1,22 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-
+<?php $__env->startSection('content'); ?>
+<main>
         <div class="container">
-                @if( session('message') )
-                <div class="alert alert-{{session('type')}} alert-dismissible show">
-                    <strong>{{session('message')}}</strong>
+                <?php if( session('message') ): ?>
+                <div class="alert alert-<?php echo e(session('type')); ?> alert-dismissible show">
+                    <strong><?php echo e(session('message')); ?></strong>
                 </div>
-                @endif
+                <?php endif; ?>
             <div class="row">
                 <div class="col s12"><h4>Welcome Admin</h4></div>
                 <div class="col s12"><h6>What do you want to do?</h6></div>        
             </div>
             
-            <form action="{{ route('logout') }}" method="POST">
-                        @csrf
+            <form action="<?php echo e(route('logout')); ?>" method="POST">
+                        <?php echo csrf_field(); ?>
                         <button type="submit">
-                            {{ __('Logout') }}
+                            <?php echo e(__('Logout')); ?>
+
                         </button>
             </form>
 
@@ -80,21 +79,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $user)
+                                        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{$user->id}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->tipo}}</td>
+                                            <td><?php echo e($user->id); ?></td>
+                                            <td><?php echo e($user->name); ?></td>
+                                            <td><?php echo e($user->email); ?></td>
+                                            <td><?php echo e($user->tipo); ?></td>
                                             <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                             <td><a class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">delete</i></a></td>
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                                 <br>
                                 <div style="text-align:right; margin-right: 12px;">
-                                    <a   href="{{route('users.create')}}" class="waves-effect waves-light btn-small green darken-3"><i class="material-icons">person_add</i></a>
+                                    <a   href="<?php echo e(route('users.create')); ?>" class="waves-effect waves-light btn-small green darken-3"><i class="material-icons">person_add</i></a>
                                 </div>
                             </div>
                         </div>
@@ -755,5 +754,7 @@
 
         </div>
 
+    </main>
+<?php $__env->stopSection(); ?>
 
-@endsection
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/home.blade.php ENDPATH**/ ?>

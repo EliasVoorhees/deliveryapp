@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +15,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', function () {
-    return view('welcome');
-});
-
-
+Route::get("/", [ProductoController::class, 'index']);
+Route::get("/home", [ProductoController::class, 'index']);
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
@@ -67,7 +62,10 @@ Route::prefix('pedido')->group(function (){
     Route::get("/", [PedidoController::class, 'index'])->name('pedidos.index');
     Route::get("/create", [PedidoController::class, 'create'])->name('pedidos.create');
     Route::post("/store",  [PedidoController::class, 'store'])->name('pedidos.store');
+Route::post("/crearSession",  [PedidoController::class, 'crearSession'])->name('pedidos.crearSession');
     Route::get("/{id}",  [PedidoController::class, 'show'])->name('pedidos.show');
+    Route::get("/add/{id}",  [PedidoController::class, 'addProducto'])->name('pedidos.add');
+    Route::get("/restar/{id}",  [PedidoController::class, 'restar'])->name('pedidos.restar');
     Route::get("/edit/{id}",  [PedidoController::class, 'edit'])->middleware(['admin', 'repartidor'])->name('pedidos.edit');
     Route::post("/update/{id}",  [PedidoController::class, 'update'])->middleware(['admin', 'repartidor'])->name('pedidos.update');
     Route::get("/delete/{id}",  [PedidoController::class, 'delete'])->name('pedidos.destroy')->middleware('admin');

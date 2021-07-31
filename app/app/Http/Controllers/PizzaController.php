@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
-use Session;
 
-class ProductoController extends Controller
+class PizzaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        
-      $pizzas= Pizza::where('disponible', '1')->get();
-      $bebidas= Producto::where('tipo', 'bebida')->get();
-
-      return view('welcome',compact('pizzas','bebidas'));
+        //
     }
 
     /**
@@ -47,10 +41,10 @@ class ProductoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Pizza  $pizza
      * @return \Illuminate\Http\Response
      */
-    public function show(Producto $producto)
+    public function show(Pizza $pizza)
     {
         //
     }
@@ -58,10 +52,10 @@ class ProductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Pizza  $pizza
      * @return \Illuminate\Http\Response
      */
-    public function edit(Producto $producto)
+    public function edit(Pizza $pizza)
     {
         //
     }
@@ -70,10 +64,10 @@ class ProductoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Pizza  $pizza
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, Pizza $pizza)
     {
         //
     }
@@ -81,10 +75,10 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Producto  $producto
+     * @param  \App\Models\Pizza  $pizza
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Producto $producto)
+    public function destroy(Pizza $pizza)
     {
         //
     }

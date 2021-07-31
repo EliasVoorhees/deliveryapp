@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Pizza Place</title>
-    <link  rel="icon" href="{{ asset("img/pii.png") }}" type="image/png" />
+    <link  rel="icon" href="<?php echo e(asset("img/pii.png")); ?>" type="image/png" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ asset("img/favicon.png") }}" / >
+    <link rel="icon" type="image/png" href="<?php echo e(asset("img/favicon.png")); ?>" / >
 
     <!-- Compiled and minified CSS -->
-    <link type="text/css" rel="stylesheet" href="{{ asset("css/materialize.min.css") }}" media="screen,projection"/>
-    <link rel="stylesheet" href="{{ asset("css/styles.css") }}">
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset("css/materialize.min.css")); ?>" media="screen,projection"/>
+    <link rel="stylesheet" href="<?php echo e(asset("css/styles.css")); ?>">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,16 +18,16 @@
 </head>
 <body>
     <!--Navbar-->
-    @include('sweetalert::alert')
+    <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <header>
         <div class="navbar-fixed">
             <nav class="green darken-1">
                 <div class="nav-wrapper">
-                    <a href="{{route('productos.index')}}" class="brand-logo">
-                        <img class="responsive-img" src="{{ asset("img/logo1.png") }}" width="340">       
+                    <a href="<?php echo e(route('productos.index')); ?>" class="brand-logo">
+                        <img class="responsive-img" src="<?php echo e(asset("img/logo1.png")); ?>" width="340">       
                     </a>
                     <ul class="right">
-                        <li><a href="{{route('home')}}"><i class="material-icons" style="font-size: 35px;">highlight_off</i></a></li> 
+                        <li><a href="<?php echo e(route('home')); ?>"><i class="material-icons" style="font-size: 35px;">highlight_off</i></a></li> 
                     </ul>
                 </div>
             </nav>
@@ -36,7 +36,7 @@
 
     <!--Content-->
     <main>
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
 
     </main>
 
@@ -65,7 +65,7 @@
     </footer> 
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="{{ asset("js/materialize.min.js") }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset("js/materialize.min.js")); ?>"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();
@@ -74,4 +74,4 @@
 
 
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/layouts/app.blade.php ENDPATH**/ ?>

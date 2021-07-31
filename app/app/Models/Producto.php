@@ -16,10 +16,16 @@ class Producto extends Model
         'disponible',
         'tipo',
         'image',
+        'tamaño',
+        'pizza_id',
     ];
 
     public function pedidos(){
         return $this->hasMany(Pedido_Detalle::class);
+    }
+
+    public function pizza(){
+        return $this->belongsTo(Pizza::class);
     }
 
 
