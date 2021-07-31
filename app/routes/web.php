@@ -29,7 +29,7 @@ Auth::routes();
 
 
 Route::prefix('repartidor')->middleware('repartidor')->group(function (){
-  Route::get('/', function () { return view('manageOrder');});
+  Route::get('/', [PedidoController::class, 'ordenes'])->name('repartidor');
 });
 
 Route::prefix('admin')->middleware('admin')->group(function (){
@@ -62,6 +62,7 @@ Route::prefix('pedido')->group(function (){
     Route::get("/", [PedidoController::class, 'index'])->name('pedidos.index');
     Route::get("/create", [PedidoController::class, 'create'])->name('pedidos.create');
     Route::post("/store",  [PedidoController::class, 'store'])->name('pedidos.store');
+Route::post("/consultar",  [PedidoController::class, 'consultar'])->name('pedidos.consultar');
 Route::post("/crearSession",  [PedidoController::class, 'crearSession'])->name('pedidos.crearSession');
     Route::get("/{id}",  [PedidoController::class, 'show'])->name('pedidos.show');
     Route::get("/add/{id}",  [PedidoController::class, 'addProducto'])->name('pedidos.add');
@@ -69,4 +70,6 @@ Route::post("/crearSession",  [PedidoController::class, 'crearSession'])->name('
     Route::get("/edit/{id}",  [PedidoController::class, 'edit'])->middleware(['admin', 'repartidor'])->name('pedidos.edit');
     Route::post("/update/{id}",  [PedidoController::class, 'update'])->middleware(['admin', 'repartidor'])->name('pedidos.update');
     Route::get("/delete/{id}",  [PedidoController::class, 'delete'])->name('pedidos.destroy')->middleware('admin');
+    Route::get("/encamino/{id}",  [PedidoController::class, 'encamino'])->name('pedidos.encamino');
+    Route::get("/entregado/{id}",  [PedidoController::class, 'entregado'])->name('pedidos.entregado');
 });

@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-            <br><br>
+            <div class="row">
+                <div class="col s12"><h4>Crear Usuario</h4></div>  
+           
+        
+ </div>
                 @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -12,6 +16,7 @@
             </ul>
         </div>
     @endif
+
             <div class="row">
                 <div class="col s8 offset-s2">
                     <div class="card-panel green lighten-5">
@@ -39,7 +44,7 @@
                                             <option value="repartidor">Repartidor</option>
                                             <option value="admin">Admin</option>
                                         </select>
-                                        <label>Role</label>
+                                        <label>Rol</label>
                                     </div>
                                 </div>
 

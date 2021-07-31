@@ -8,12 +8,30 @@
     
  </style>
         <div class="container">
-            <div class="row">
+            <div class="row" style="margin-bottom:0;">
                 <div class="col s12"><h4>Bienvenido</h4></div>
-                <div class="col s12"><h6>¿Qué desea ordenar?</h6></div>        
+                <div class="col s12"><h6>¿Qué desea ordenar?</h6></div>   
+                  <div  style="text-align:right;">
+                                    <a  type="submit" href="{{route('pedidos.index')}}" class="waves-effect waves-light btn-small green darken-3">Realizar Pedido</a>
+                  </div> 
+
+                     <form role="form" action="{{ route('pedidos.consultar') }}"  method="post" enctype="multipart/form-data">
+                                   @csrf
+                    <div class="input-field col s3">
+                          <input name="pedido" id="pedido" type="text" class="validate">
+                    <label for="pedido">Consultar Pedido</label>
+                    </div>
+
+                     <button  style="margin-top:25px;" class="btn waves-effect waves-light green darken-2" type="submit" name="action">Consultar
+                   </button>
+                    </form>
+            
             </div>
+           
             <div class="row">
-               <h5>Pizzas</h5>
+              <div class="row">
+                 <div class="col s12"><h5>Pizzas</h5></div>
+                   </div>
                     <div class="row">
                           @foreach($pizzas as $p)
                         <div class="col s4">
@@ -28,9 +46,9 @@
                                     <div class="row">
                                         <div class="input-field col s12"> 
                                             <select id="producto{{ $p->id }}">
-                                                <option value="" disabled selected>Tamaño</option>
+                                                <option value="" disabled>Tamaño</option>
                                                 @foreach($p->productos as $t)
-                                                <option value="{{$t->id}}">{{$t->tamaño}} {{$t->precio}}$</option>
+                                                <option  selected value="{{$t->id}}">{{$t->tamaño}} {{$t->precio}}$</option>
                                                   @endforeach
                                             </select>
                                         </div>  
@@ -40,7 +58,11 @@
                         </div>
                           @endforeach
                        </div>
-                    <h5>Bebidas</h5>
+
+                    <div class="row">
+                      <div class="col s12"><h5>Bebidas</h5>
+                      </div>
+                      </div>
                     <div class="row">
                         @foreach($bebidas as $b)
                         <div class="col s4">
