@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 use Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductoController extends Controller
 {

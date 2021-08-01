@@ -27,7 +27,7 @@
                         <img class="responsive-img" src="{{ asset("img/logo1.png") }}" width="340">       
                     </a>
                     <ul class="right">
-                        <li><a href="{{route('home')}}"><i class="material-icons" style="font-size: 35px;">highlight_off</i></a></li> 
+                        <li><a href="{{route('home')}}"><i class="material-icons" style="font-size: 35px;">account_circle</i></a></li> 
                     </ul>
                 </div>
             </nav>
@@ -46,10 +46,9 @@
             <div class="row">
                 <div class="col l6 m12">
                     <h5 class="white-text">Pizza Place</h5>
-                    <p class="grey-text text-lighten-4">Blue Rise, Mabbettsville, New York, 12959-7229, US</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Contact</h5>
+                    <h5 class="white-text">Contacto</h5>
                     <ul>
                         <li><h6><i class="tiny material-icons">call</i>(845) 631-2102</h6></li>
                         <li><h6><i class="tiny material-icons">call</i>(917) 148-1304</h6></li> 
@@ -59,7 +58,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © Copyright 2020. All rights reserved. Powered by PizzaPlace
+                © Copyright 2021. All rights reserved. Powered by PizzaPlace
             </div>
         </div>
     </footer> 

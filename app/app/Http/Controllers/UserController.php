@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -52,7 +53,11 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            return redirect('admin')->with(['message' => 'El usuario ha sido agregado exitosamente', 'type' => 'success']);
+
+            Alert::success('El usuario ha sido agregado exitosamente');
+
+
+            return redirect('admin');
             //
        
     }
