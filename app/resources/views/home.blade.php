@@ -25,12 +25,13 @@
                 <div class="col s12">
                     <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
-                            <span class="card-title">Manage</span> <!--USER & ROLE-->
+                            <span class="card-title">Manage <a class="waves-effect waves-light btn-small green darken-1" href="{{route('admin.createPizza')}}"> Crear Pizza </a> <a class="waves-effect waves-light btn-small green darken-1" href = "{{route('admin.createProduct')}}"> Crear Producto </a> </span> <!--USER & ROLE-->
+
                         </div>
                         <div class="card-tabs">
                             <ul class="tabs tabs-fixed-width">
-                                <li class="tab"><a class="active" href="#role">Role</a></li>
-                                <li class="tab"><a href="#user">User</a></li>
+                                <li class="tab"><a class="active" href="#role">Menu</a></li>
+                                <li class="tab"><a href="#user">Users</a></li>
                             </ul>
                         </div>
                         <div class="card-content grey lighten-4">
