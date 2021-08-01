@@ -140,7 +140,7 @@ input[type=number]::-webkit-outer-spin-button {
         let direccion= $('#direccion').val();
 
         $.ajax({
-          url: "/deliveryapp/app/public/pedido/crearSession",
+          url: "{{route('pedidos.crearSession')}}",
           type:"POST",
           data:{
             "_token": "{{ csrf_token() }}",
