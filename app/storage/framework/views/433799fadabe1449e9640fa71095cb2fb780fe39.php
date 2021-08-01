@@ -37,7 +37,10 @@
                         <div class="col s4">
                             <div class="card">
                                 <div class="card-image">
-                                    <img src="<?php echo e(asset("img/productos/pizza.png")); ?>">
+                                  <?php
+                                    $link = $p->productos[0]->image;
+                                ?>
+                                  <img src="<?php echo e(asset("storage/product/$link")); ?>"/>
                                     <a id=<?php echo e($p->id); ?> class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content card-contentPizza">
@@ -47,7 +50,7 @@
                                         <div class="input-field col s12"> 
                                             <select id="producto<?php echo e($p->id); ?>">
                                                 <option value="" disabled>Tamaño</option>
-                                                <?php $__currentLoopData = $p->productos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php $__currentLoopData = $p->productos->where('disponible', '1'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option  selected value="<?php echo e($t->id); ?>"><?php echo e($t->tamaño); ?> <?php echo e($t->precio); ?>$</option>
                                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
@@ -67,9 +70,11 @@
                         <?php $__currentLoopData = $bebidas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col s4">
                             <div class="card">
-                                <div class="card-image">
-                                    <img src="img/fanta.png">
-                                    <a href="<?php echo e(route('pedidos.add', ['id' => $b->id])); ?>"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
+                                <div class="card-image Bebida">
+                                     <?php
+                                    $link = $b->image;
+                                ?>
+                                  <img src="<?php echo e(asset("storage/product/$link")); ?>"/>                                    <a href="<?php echo e(route('pedidos.add', ['id' => $b->id])); ?>"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title"><?php echo e($b->nombre); ?></span>

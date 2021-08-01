@@ -75,8 +75,17 @@
         } else {
                 x.style.display = "none";
         }
+       
+       var y = document.getElementById("selectPizzaT");
 
-       }
+        if (y.style.display === "none") {
+                y.style.display = "block";
+        } else {
+                y.style.display = "none";
+        }
+
+       
+   }
 
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();

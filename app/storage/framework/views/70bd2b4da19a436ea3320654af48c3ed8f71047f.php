@@ -1,13 +1,13 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
         <div class="container">
-                @if( session('message') )
-                <div class="alert alert-{{session('type')}} alert-dismissible show">
-                    <strong>{{session('message')}}</strong>
+                <?php if( session('message') ): ?>
+                <div class="alert alert-<?php echo e(session('type')); ?> alert-dismissible show">
+                    <strong><?php echo e(session('message')); ?></strong>
                 </div>
-                @endif
+                <?php endif; ?>
  <br>
             <div class="row">
                 <div class="col s12">
@@ -21,9 +21,9 @@
 
                            
 
-                            <form action= " {{route('admin.storePizza')}}" method="POST" enctype="multipart/form-data">
+                            <form action= " <?php echo e(route('admin.storePizza')); ?>" method="POST" enctype="multipart/form-data">
 
-                            @csrf
+                            <?php echo csrf_field(); ?>
 
                             <label>
                                <b> Nombre de la Pizza </b>
@@ -58,4 +58,6 @@
                 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/createPizza.blade.php ENDPATH**/ ?>

@@ -17,10 +17,24 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        
+       
       $pizzas= Pizza::where('disponible', '1')->get();
-      $bebidas= Producto::where('tipo', 'bebida')->get();
-
+      $bebidas= Producto::where('tipo', 'bebida')->where('disponible', '1')->get();
+        
+       $x=0;
+       foreach($pizzas as $p){
+            if($p->productos->isEmpty()) { $pizzas->forget($x);
+            }
+            else{
+                    if($p->productos->where('disponible', '1')->isEmpty()) { 
+                      $pizzas->forget($x);
+                    }
+        
+            }
+            $x++;
+        }
+   
+        
       return view('welcome',compact('pizzas','bebidas'));
     }
 

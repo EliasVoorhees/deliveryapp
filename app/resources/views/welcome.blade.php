@@ -37,7 +37,10 @@
                         <div class="col s4">
                             <div class="card">
                                 <div class="card-image">
-                                    <img src="{{ asset("img/productos/pizza.png") }}">
+                                  @php
+                                    $link = $p->productos[0]->image;
+                                @endphp
+                                  <img src="{{ asset("storage/product/$link") }}"/>
                                     <a id={{$p->id}} class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content card-contentPizza">
@@ -47,7 +50,7 @@
                                         <div class="input-field col s12"> 
                                             <select id="producto{{ $p->id }}">
                                                 <option value="" disabled>Tamaño</option>
-                                                @foreach($p->productos as $t)
+                                                @foreach($p->productos->where('disponible', '1') as $t)
                                                 <option  selected value="{{$t->id}}">{{$t->tamaño}} {{$t->precio}}$</option>
                                                   @endforeach
                                             </select>
@@ -67,9 +70,11 @@
                         @foreach($bebidas as $b)
                         <div class="col s4">
                             <div class="card">
-                                <div class="card-image">
-                                    <img src="img/fanta.png">
-                                    <a href="{{route('pedidos.add', ['id' => $b->id])}}"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
+                                <div class="card-image Bebida">
+                                     @php
+                                    $link = $b->image;
+                                @endphp
+                                  <img src="{{ asset("storage/product/$link") }}"/>                                    <a href="{{route('pedidos.add', ['id' => $b->id])}}"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title">{{$b->nombre}}</span>

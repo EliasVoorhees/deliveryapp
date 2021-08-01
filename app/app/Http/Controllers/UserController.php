@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-      // return view('users.create');
+      return view('users.create');
     }
 
     /**
@@ -84,9 +84,8 @@ class UserController extends Controller
             /* $request->validate([
                 'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);*/
-
+            $files = $request->file('image');
             $request->image->store('product', 'public');
-
             $producto->image =  $request->image->hashName();
           
        

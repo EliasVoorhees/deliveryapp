@@ -2,22 +2,17 @@
 
 <?php $__env->startSection('content'); ?>
     <div class="container">
-      
-            <br>
 
-            <div class="row">
-
-                    
-
+             <div class="row">
             <div class="col s12">
             <form action="<?php echo e(route('logout')); ?>" method="POST">
                         <?php echo csrf_field(); ?>
                         <button  style="margin-top:25px;" class="btn waves-effect waves-light green darken-2" type="submit" name="action">
                             <?php echo e(__('Logout')); ?>
 
-                        </button>
+                        </button>  </form>
                   </div> 
-               
+                 </div> 
             <div class="row">
                 <div class="col s12">
                     <div class="card  green lighten-3">
@@ -257,7 +252,7 @@
                 </div>
            </div> 
                
- </div>
+
         </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
