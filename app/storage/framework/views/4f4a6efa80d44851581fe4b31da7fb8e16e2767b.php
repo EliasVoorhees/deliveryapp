@@ -46,6 +46,15 @@ input[type=number]::-webkit-outer-spin-button {
                         </div>
 
                         <div class="card-content grey lighten-4">
+                              <?php if($errors->any()): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><?php echo e($error); ?></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                             <div id="role">
                                    <form role="form" <?php if(isset($edit)): ?> action="<?php echo e(route('pedidos.update', $pedido->id)); ?>" <?php elseif( !isset($show) ): ?> action="<?php echo e(route('pedidos.store')); ?>" <?php endif; ?> method="post" enctype="multipart/form-data">
                                    <?php echo csrf_field(); ?>
@@ -53,7 +62,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input class="cambiar" value="<?php echo e($pedido->nombre_cliente); ?>" name="name" id="name" type="text" class="validate">
+                                        <input class="cambiar" value="<?php echo e($pedido->nombre_cliente); ?>" name="nombre" id="nombre" type="text" class="validate">
                                         <label for="name">Nombre</label>
                                     </div>
                                     <div class="input-field col s6">
@@ -135,7 +144,7 @@ input[type=number]::-webkit-outer-spin-button {
 
        $(".cambiar").on('change', function postinput(event){
         event.preventDefault();
-        let name = $('#name').val();
+        let nombre = $('#nombre').val();
         let telefono = $('#telefono').val();
         let direccion= $('#direccion').val();
 
@@ -144,7 +153,7 @@ input[type=number]::-webkit-outer-spin-button {
           type:"POST",
           data:{
             "_token": "<?php echo e(csrf_token()); ?>",
-            name:name,
+            nombre:nombre,
             telefono:telefono,
             direccion:direccion,
           },

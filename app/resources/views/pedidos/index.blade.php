@@ -46,6 +46,15 @@ input[type=number]::-webkit-outer-spin-button {
                         </div>
 
                         <div class="card-content grey lighten-4">
+                              @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                             <div id="role">
                                    <form role="form" @if(isset($edit)) action="{{ route('pedidos.update', $pedido->id) }}" @elseif( !isset($show) ) action="{{ route('pedidos.store') }}" @endif method="post" enctype="multipart/form-data">
                                    @csrf
@@ -53,7 +62,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input class="cambiar" value="{{$pedido->nombre_cliente}}" name="name" id="name" type="text" class="validate">
+                                        <input class="cambiar" value="{{$pedido->nombre_cliente}}" name="nombre" id="nombre" type="text" class="validate">
                                         <label for="name">Nombre</label>
                                     </div>
                                     <div class="input-field col s6">
@@ -135,7 +144,7 @@ input[type=number]::-webkit-outer-spin-button {
 
        $(".cambiar").on('change', function postinput(event){
         event.preventDefault();
-        let name = $('#name').val();
+        let nombre = $('#nombre').val();
         let telefono = $('#telefono').val();
         let direccion= $('#direccion').val();
 
@@ -144,7 +153,7 @@ input[type=number]::-webkit-outer-spin-button {
           type:"POST",
           data:{
             "_token": "{{ csrf_token() }}",
-            name:name,
+            nombre:nombre,
             telefono:telefono,
             direccion:direccion,
           },

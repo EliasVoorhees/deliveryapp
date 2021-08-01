@@ -25,8 +25,8 @@
                                    <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input name="name" id="name" type="text" class="validate">
-                                        <label for="name">Nombre</label>
+                                        <input name="nombre" id="name" type="text" class="validate">
+                                        <label for="nombre">Nombre</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input  name="email" id="email" type="email" class="validate">
@@ -40,8 +40,8 @@
                                     </div>
                                      <div class="input-field col s6">
                                         <select name="tipo"  id="tipo">
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="repartidor">Repartidor</option>
+                                            <option value="" disabled>Choose your option</option>
+                                            <option selected value="repartidor">Repartidor</option>
                                             <option value="admin">Admin</option>
                                         </select>
                                         <label>Rol</label>

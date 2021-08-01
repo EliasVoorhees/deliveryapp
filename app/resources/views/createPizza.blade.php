@@ -15,8 +15,19 @@
                         <div class="card-content white-text">
                             <span class="card-title">Crear Pizza</span>
                         </div>
-
+ 
                         <div class="card-content grey lighten-4">
+
+                                               @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                             <div id="role">
 
                            
@@ -27,13 +38,13 @@
 
                             <label>
                                <b> Nombre de la Pizza </b>
-                                <input type= "text" name ="name"> </input>
+                                <input type= "text" name ="nombre"> </input>
                             </label>
                             <br> <br>
                             <label>
                                <b> Descripción de la Pizza</b>
                                <br> <br>
-                                <textarea name ="description"> </textarea>
+                                <textarea name ="descripcion"> </textarea>
                             </label>        
                             <br> <br>
                             <label>

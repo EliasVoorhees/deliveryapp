@@ -13,11 +13,21 @@
             <div class="row">
                 <div class="col s12">
                     <div class="card blue-grey darken-1">
+
                         <div class="card-content white-text">
                                 <span class="card-title">Crear Producto</span>
                         </div>
 
                         <div class="card-content grey lighten-4">
+                              <?php if($errors->any()): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li><?php echo e($error); ?></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                             <div id="role">
 
                            
@@ -28,13 +38,13 @@
 
                             <label>
                                <b> Nombre del Producto </b>
-                                <input type= "text" name ="name"> </input>
+                                <input type= "text" name ="nombre"> </input>
                             </label>
                             <br> <br>
                             <label>
                                <b> Descripción del Producto </b>
                                <br> <br>
-                                <textarea name ="description"> </textarea>
+                                <textarea name ="descripcion"> </textarea>
                             </label>        
                             <br> <br>
                             <label>
@@ -47,7 +57,7 @@
                             <br> 
                             <label>
                                <b> Precio del Producto </b>
-                                <input type= "number" name ="price"> </input>
+                                <input step="any" type= "number" name ="precio"> </input>
                             </label>
                             <br> <br>
                             <label id="selectPizzaT">

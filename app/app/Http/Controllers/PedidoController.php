@@ -67,7 +67,7 @@ class PedidoController extends Controller
 
    
             $pedido = Session::get('pedido');
-            $pedido->nombre_cliente = $request->name;
+            $pedido->nombre_cliente = $request->nombre;
             $pedido->numero_contacto = $request->telefono;
             $pedido->direccion = $request->direccion;
            
@@ -96,14 +96,14 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
             $validated = $request->validate([
-                'name' => 'required',
+                'nombre' => 'required',
                 'telefono' => 'required|numeric',
                 'direccion' => 'required',
             ]);
           
             $pedido = Session::get('pedido');
             if($pedido->pedido_detalle->isEmpty()) return redirect()->route('pedidos.index');
-            $pedido->nombre_cliente = $request->name;
+            $pedido->nombre_cliente = $request->nombre;
             $pedido->numero_contacto = $request->telefono;
             $pedido->direccion = $request->direccion;
             $pedido->estado = "En Proceso";

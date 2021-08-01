@@ -64,16 +64,22 @@ class UserController extends Controller
      */
     public function storeProduct(Request $request)
     {
+              $validated = $request->validate([
+                'nombre' => 'required|unique:productos',
+                'descripcion' => 'required',
+                'precio' => 'required|numeric',
+            ]);
+
 
       if($request->type == "pizza"){
          
          $producto = new Producto();
 
-        $producto->nombre = $request->name;
-        $producto->descripcion = $request->description;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
         $producto->tipo = $request->type;
         $producto->disponible = $request->available;
-        $producto->precio = $request->price;
+        $producto->precio = $request->precio;
         $producto->pizza_id = $request->pizza;
         $producto->tamaño = $request->size;
 
@@ -102,11 +108,11 @@ class UserController extends Controller
 
         $producto = new Producto();
 
-        $producto->nombre = $request->name;
-        $producto->descripcion = $request->description;
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
         $producto->tipo = $request->type;
         $producto->disponible = $request->available;
-        $producto->precio = $request->price;
+        $producto->precio = $request->precio;
         $producto->tamaño = $request->size;
 
 
@@ -139,12 +145,17 @@ class UserController extends Controller
     public function storePizza(Request $request)
     {
 
+       $validated = $request->validate([
+                'nombre' => 'required|unique:pizzas',
+                'descripcion' => 'required',
+            ]);
+
       
          
          $pizza = new Pizza();
 
-        $pizza->nombre = $request->name;
-        $pizza->descripcion = $request->description;
+        $pizza->nombre = $request->nombre;
+        $pizza->descripcion = $request->descripcion;
         $pizza->disponible = $request->available;
         $pizza->save();
         
@@ -169,13 +180,13 @@ class UserController extends Controller
 
              $validated = $request->validate([
                 'email' => 'required|unique:users',
-                'name' => 'required',
+                'nombre' => 'required',
                 'tipo' => 'required',
                 'password' => 'required',
             ]);
 
             $user = new User;
-            $user->name = $request->name;
+            $user->name = $request->nombre;
             $user->email = $request->email;
             $user->tipo = $request->tipo;
             $user->password = bcrypt($request->password);
