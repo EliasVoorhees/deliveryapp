@@ -34,6 +34,10 @@ Route::prefix('repartidor')->middleware('repartidor')->group(function (){
 
 Route::prefix('admin')->middleware('admin')->group(function (){
   Route::get('/', [UserController::class, 'index'])->name('home');
+  Route::get('/createProduct', [UserController::class, 'createProduct'])->name('admin.createProduct');
+  Route::post('/product', [UserController::class, 'storeProduct'])->name('admin.storeProduct');
+  Route::get('/createPizza', [UserController::class, 'createPizza'])->name('admin.createPizza');  
+  Route::post('/pizza', [UserController::class, 'storePizza'])->name('admin.storePizza');
 
 });
 

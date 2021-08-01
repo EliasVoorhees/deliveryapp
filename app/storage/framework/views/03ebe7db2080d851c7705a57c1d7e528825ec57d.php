@@ -1,5 +1,7 @@
+
+
 <?php $__env->startSection('content'); ?>
-<main>
+
         <div class="container">
                 <?php if( session('message') ): ?>
                 <div class="alert alert-<?php echo e(session('type')); ?> alert-dismissible show">
@@ -24,12 +26,13 @@
                 <div class="col s12">
                     <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
-                            <span class="card-title">Manage</span> <!--USER & ROLE-->
+                            <span class="card-title">Manage <a class="waves-effect waves-light btn-small green darken-1" href="<?php echo e(route('admin.createPizza')); ?>"> Crear Pizza </a> <a class="waves-effect waves-light btn-small green darken-1" href = "<?php echo e(route('admin.createProduct')); ?>"> Crear Producto </a> </span> <!--USER & ROLE-->
+
                         </div>
                         <div class="card-tabs">
                             <ul class="tabs tabs-fixed-width">
-                                <li class="tab"><a class="active" href="#role">Role</a></li>
-                                <li class="tab"><a href="#user">User</a></li>
+                                <li class="tab"><a class="active" href="#role">Menu</a></li>
+                                <li class="tab"><a href="#user">Users</a></li>
                             </ul>
                         </div>
                         <div class="card-content grey lighten-4">
@@ -754,7 +757,7 @@
 
         </div>
 
-    </main>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/home.blade.php ENDPATH**/ ?>
