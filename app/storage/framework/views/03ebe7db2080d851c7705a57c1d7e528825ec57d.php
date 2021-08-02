@@ -62,7 +62,12 @@
                                             <td><?php echo e($user->email); ?></td>
                                             <td><?php echo e($user->tipo); ?></td>
                                             <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
-                                            <td><a class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">delete</i></a></td>
+                                             <?php if($user->activo): ?>
+                                            <td><a  href="<?php echo e(route('users.activo', ['id' => $user->id])); ?>" class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">person_remove</i></a></td>
+                                            <?php else: ?>
+                                                <td><a  href="<?php echo e(route('users.activo', ['id' => $user->id])); ?>" class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">how_to_reg </i></a></td>
+
+                                            <?php endif; ?>
                                         </tr>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>

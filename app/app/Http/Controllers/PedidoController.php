@@ -96,9 +96,9 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
             $validated = $request->validate([
-                'nombre' => 'required',
-                'telefono' => 'required|numeric',
-                'direccion' => 'required',
+                'nombre' => 'required|max:255',
+                'telefono' => 'required|numeric|max:255',
+                'direccion' => 'required|max:255',
             ]);
           
             $pedido = Session::get('pedido');

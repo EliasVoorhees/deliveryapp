@@ -90,7 +90,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                                                   </td>
 
-                                                <td>{{$detalles->precio}} </td>
+                                                <td>{{$detalles->precio}}$ </td>
                                             </tr>
                                        @endforeach
                                         </tbody>
@@ -101,7 +101,7 @@ input[type=number]::-webkit-outer-spin-button {
                         
 
                                  <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> {{$pedido->total_precio}} 
+                                   <b>Total:</b> {{$pedido->total_precio}}$ 
                                 </div>
 
                                     <br>

@@ -71,14 +71,14 @@
 
                                                   </td>
 
-                                                <td><?php echo e($detalles->precio); ?> </td>
+                                                <td><?php echo e($detalles->precio); ?>$ </td>
                                             </tr>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> <?php echo e($p->total_precio); ?> 
+                                   <b>Total:</b> <?php echo e($p->total_precio); ?>$ 
                                 </div>
                                 </td>
                                 </tr>
@@ -150,14 +150,14 @@
 
                                                   </td>
 
-                                                <td><?php echo e($detalles->precio); ?> </td>
+                                                <td><?php echo e($detalles->precio); ?>$</td>
                                             </tr>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> <?php echo e($p->total_precio); ?> 
+                                   <b>Total:</b> <?php echo e($p->total_precio); ?>$
                                 </div>
                                 </td>
                                 </tr>
@@ -231,14 +231,14 @@
 
                                                   </td>
 
-                                                <td><?php echo e($detalles->precio); ?> </td>
+                                                <td><?php echo e($detalles->precio); ?>$ </td>
                                             </tr>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> <?php echo e($p->total_precio); ?> 
+                                   <b>Total:</b> <?php echo e($p->total_precio); ?>$
                                 </div>
                                 </td>
                                 </tr>

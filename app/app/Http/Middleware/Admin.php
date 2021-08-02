@@ -23,8 +23,11 @@ class Admin
         if (Auth::check() &&  Auth::user()->tipo == "repartidor" && Auth::user()->activo)
         return redirect('/repartidor');
             
-        if (Auth::check() && !Auth::user()->activo)
-        Auth::logout();
+        if (Auth::check() && !Auth::user()->activo){
+           Auth::logout();
+           Alert::error('Error', 'Usuario desactivado');
+           return redirect("/");
+       }
 
         if (!Auth::check())
         return redirect('/login');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -40,6 +41,7 @@ class LoginController extends Controller
     }
 
     public function redirectPath(){
+      
         if(Auth::user()->tipo=="admin"){ 
             return '/admin';
         }

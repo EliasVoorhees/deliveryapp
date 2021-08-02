@@ -49,6 +49,7 @@ Route::prefix('users')->middleware('admin')->group(function (){
     Route::get("/edit/{id}",  [UserController::class, 'edit'])->name('users.edit');
     Route::post("/update/{id}",  [UserController::class, 'update'])->name('users.update');
     Route::get("/delete/{id}",  [UserController::class, 'delete'])->name('users.destroy');
+    Route::get("/activo/{id}",  [UserController::class, 'activo'])->name('users.activo');
 });
 
 Route::get("/menu", [ProductoController::class, 'index'])->name('productos.index');

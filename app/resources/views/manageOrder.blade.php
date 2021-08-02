@@ -70,14 +70,14 @@
 
                                                   </td>
 
-                                                <td>{{$detalles->precio}} </td>
+                                                <td>{{$detalles->precio}}$ </td>
                                             </tr>
                                        @endforeach
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> {{$p->total_precio}} 
+                                   <b>Total:</b> {{$p->total_precio}}$ 
                                 </div>
                                 </td>
                                 </tr>
@@ -149,14 +149,14 @@
 
                                                   </td>
 
-                                                <td>{{$detalles->precio}} </td>
+                                                <td>{{$detalles->precio}}$</td>
                                             </tr>
                                        @endforeach
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> {{$p->total_precio}} 
+                                   <b>Total:</b> {{$p->total_precio}}$
                                 </div>
                                 </td>
                                 </tr>
@@ -230,14 +230,14 @@
 
                                                   </td>
 
-                                                <td>{{$detalles->precio}} </td>
+                                                <td>{{$detalles->precio}}$ </td>
                                             </tr>
                                        @endforeach
                                         </tbody>
                                     </table> 
                                     <br>
                                         <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> {{$p->total_precio}} 
+                                   <b>Total:</b> {{$p->total_precio}}$
                                 </div>
                                 </td>
                                 </tr>

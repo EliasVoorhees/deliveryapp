@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Repartidor
 {
@@ -23,8 +24,11 @@ class Repartidor
        if (Auth::check() &&  Auth::user()->tipo == "admin" && Auth::user()->activo)
         return redirect('/admin');
 
-       if (Auth::check() && !Auth::user()->activo)
-        Auth::logout();
+       if (Auth::check() && !Auth::user()->activo){
+           Auth::logout();
+           Alert::error('Error', 'Usuario desactivado');
+           return redirect("/");
+       }
     
         return redirect('/');
     }

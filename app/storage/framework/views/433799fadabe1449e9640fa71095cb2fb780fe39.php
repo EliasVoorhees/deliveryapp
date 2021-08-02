@@ -40,7 +40,7 @@
                                   <?php
                                     $link = $p->productos[0]->image;
                                 ?>
-                                  <img src="<?php echo e(asset("storage/product/$link")); ?>"/>
+                                  <img src="<?php echo e(asset("img/pizza.png")); ?>"/>
                                     <a id=<?php echo e($p->id); ?> class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content card-contentPizza">
@@ -74,7 +74,7 @@
                                      <?php
                                     $link = $b->image;
                                 ?>
-                                  <img src="<?php echo e(asset("storage/product/$link")); ?>"/>                                    <a href="<?php echo e(route('pedidos.add', ['id' => $b->id])); ?>"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
+                                  <img src="<?php echo e(asset("img/pepsi.png")); ?>"/>                                    <a href="<?php echo e(route('pedidos.add', ['id' => $b->id])); ?>"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title"><?php echo e($b->nombre); ?></span>

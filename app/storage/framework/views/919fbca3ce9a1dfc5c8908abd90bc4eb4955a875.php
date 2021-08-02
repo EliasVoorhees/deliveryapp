@@ -90,7 +90,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                                                   </td>
 
-                                                <td><?php echo e($detalles->precio); ?> </td>
+                                                <td><?php echo e($detalles->precio); ?>$ </td>
                                             </tr>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
@@ -101,7 +101,7 @@ input[type=number]::-webkit-outer-spin-button {
                         
 
                                  <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> <?php echo e($pedido->total_precio); ?> 
+                                   <b>Total:</b> <?php echo e($pedido->total_precio); ?>$ 
                                 </div>
 
                                     <br>

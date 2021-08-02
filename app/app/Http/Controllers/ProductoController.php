@@ -17,7 +17,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-       
+      $p= Producto::find(2);
+      $p->tamaño="Grande";
+      $p->save();
       $pizzas= Pizza::where('disponible', '1')->get();
       $bebidas= Producto::where('tipo', 'bebida')->where('disponible', '1')->get();
         

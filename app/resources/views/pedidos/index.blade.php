@@ -6,14 +6,15 @@
         width: 20%;
        text-align: left !important;
     }
-    .cantidad {   
+    .cantidad div{   
     display: flex; 
     justify-content: space-between;
     align-content:  center;
     text-align: center;
     vertical-align: middle;
     line-height: 30px; 
-    margin-top: 10px;
+    position: relative;
+
     }
 
     td, th {
@@ -94,17 +95,18 @@ input[type=number]::-webkit-outer-spin-button {
                                                 <td class="producto">{{$detalles->producto->descripcion}} </td>
                                                 <td>       
                                                    <div style="padding:0 50px 0 50px">
-                                                <input value="{{$detalles->comentarios}}" id="comentario" type="text" class="form-control" name="comentario{{$detalles->id}}" value="{{ old('email') }}">
+                                                <input value="{{$detalles->comentarios}}" id="comentario" type="text" class="form-control" name="comentario{{$detalles->id}}">
                    
                                             </div> 
                                              </td>
                                                 <td class="cantidad">
+                                                    <div> 
                                                     <a  href="{{route('pedidos.restar', ['id' => $detalles->producto->id])}}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">remove</i></a>
                                                     <div> {{ $detalles->cantidad}}  </div>
 
                                                     <a href="{{route('pedidos.add', ['id' => $detalles->producto->id])}}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a></td>
-
-                                                <td>{{$detalles->precio}} </td>
+                                                   </div>
+                                                <td>{{$detalles->precio}}$ </td>
                                             </tr>
                                        @endforeach
                                         </tbody>
@@ -118,7 +120,7 @@ input[type=number]::-webkit-outer-spin-button {
                         
 
                                  <div style="text-align:right;font-size: 20px;">
-                                   <b>Total:</b> {{$pedido->total_precio}} 
+                                   <b>Total:</b> {{$pedido->total_precio}}$
                                 </div>
 
                                     <br>

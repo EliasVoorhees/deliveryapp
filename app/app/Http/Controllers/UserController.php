@@ -8,6 +8,7 @@ use App\Models\Pizza;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Auth;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::all()->except(Auth::id());
         return view('home')->with('users', $users);
     }
 
@@ -65,8 +66,8 @@ class UserController extends Controller
     public function storeProduct(Request $request)
     {
               $validated = $request->validate([
-                'nombre' => 'required|unique:productos',
-                'descripcion' => 'required',
+                'nombre' => 'required|unique:productos|max:255',
+                'descripcion' => 'required|max:255',
                 'precio' => 'required|numeric',
             ]);
 
@@ -146,8 +147,8 @@ class UserController extends Controller
     {
 
        $validated = $request->validate([
-                'nombre' => 'required|unique:pizzas',
-                'descripcion' => 'required',
+                'nombre' => 'required|unique:pizzas|max:255',
+                'descripcion' => 'required|max:255',
             ]);
 
       
@@ -179,10 +180,10 @@ class UserController extends Controller
          
 
              $validated = $request->validate([
-                'email' => 'required|unique:users',
-                'nombre' => 'required',
+                'email' => 'required|unique:users|max:255|email',
+                'nombre' => 'required|max:255',
                 'tipo' => 'required',
-                'password' => 'required',
+                'password' => 'required|min:8',
             ]);
 
             $user = new User;
@@ -221,6 +222,19 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+    }
+
+    public function activo(Request $request, $id)
+    {
+         $user= User::find($id);
+         if($user->activo)$user->activo=0;
+         else $user->activo=1;
+
+         $user->save();
+         if($user->activo)
+         Alert::info('Usuario activado');
+         else Alert::info('Usuario desactivado');
+         return redirect()->route('home');
     }
 
     /**

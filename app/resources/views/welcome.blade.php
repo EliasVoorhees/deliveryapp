@@ -40,7 +40,7 @@
                                   @php
                                     $link = $p->productos[0]->image;
                                 @endphp
-                                  <img src="{{ asset("storage/product/$link") }}"/>
+                                  <img src="{{ asset("img/pizza.png") }}"/>
                                     <a id={{$p->id}} class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content card-contentPizza">
@@ -74,7 +74,7 @@
                                      @php
                                     $link = $b->image;
                                 @endphp
-                                  <img src="{{ asset("storage/product/$link") }}"/>                                    <a href="{{route('pedidos.add', ['id' => $b->id])}}"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
+                                  <img src="{{  asset("img/pepsi.png") }}"/>                                    <a href="{{route('pedidos.add', ['id' => $b->id])}}"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title">{{$b->nombre}}</span>
