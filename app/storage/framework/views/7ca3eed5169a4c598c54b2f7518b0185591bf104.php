@@ -69,8 +69,11 @@
 
        function selectPizza(){
         var x = document.getElementById("selectPizza");
+        var tipo = document.getElementById("tipo");
 
-        if (x.style.display === "none") {
+        
+       
+        if (tipo.value === "pizza") {
                 x.style.display = "block";
         } else {
                 x.style.display = "none";
@@ -78,7 +81,7 @@
        
        var y = document.getElementById("selectPizzaT");
 
-        if (y.style.display === "none") {
+        if (tipo.value === "pizza") {
                 y.style.display = "block";
         } else {
                 y.style.display = "none";
