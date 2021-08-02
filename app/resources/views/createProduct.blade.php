@@ -38,18 +38,18 @@
 
                             <label>
                                <b> Nombre del Producto </b>
-                                <input type= "text" name ="nombre"> </input>
+                                <input type= "text" name ="nombre" required> </input>
                             </label>
                             <br> <br>
                             <label>
                                <b> Descripción del Producto </b>
                                <br> <br>
-                                <textarea name ="descripcion"> </textarea>
+                                <textarea name ="descripcion" required> </textarea>
                             </label>        
                             <br> <br>
                             <label>
                                <b> Tipo de Producto </b>
-                               <select name="type" onchange="selectPizza()">
+                               <select name="type" id="tipo" onchange="selectPizza()">
                                 <option value="pizza">Pizza</option>
                                 <option value="bebida">Bebida</option>
                                 </select>
@@ -57,7 +57,7 @@
                             <br> 
                             <label>
                                <b> Precio del Producto </b>
-                                <input step="any" type= "number" name ="precio"> </input>
+                                <input step="any" type= "number" name ="precio" required> </input>
                             </label>
                             <br> <br>
                             <label id="selectPizzaT">

@@ -46,7 +46,7 @@ return [
     'file' => 'The :attribute must be a file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
-        'numeric' => 'The :attribute must be greater than :value.',
+        'numeric' => 'El :attribute debe ser mayor que :value.',
         'file' => 'The :attribute must be greater than :value kilobytes.',
         'string' => 'The :attribute must be greater than :value characters.',
         'array' => 'The :attribute must have more than :value items.',
@@ -67,7 +67,7 @@ return [
     'json' => 'The :attribute must be a valid JSON string.',
     'lt' => [
         'numeric' => 'The :attribute must be less than :value.',
-        'file' => 'The :attribute must be less than :value kilobytes.',
+        'file' => 'El :attribute debe pesar menos de :value kilobytes.',
         'string' => 'The :attribute must be less than :value characters.',
         'array' => 'The :attribute must have less than :value items.',
     ],
@@ -79,7 +79,7 @@ return [
     ],
     'max' => [
         'numeric' => 'The :attribute must not be greater than :max.',
-        'file' => 'The :attribute must not be greater than :max kilobytes.',
+        'file' => 'La :attribute debe pesar menos de :max kilobytes.',
         'string' => 'El campo :attribute no debe tener más de :max caracteres.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
