@@ -27,74 +27,62 @@
                     </form>
             
             </div>
-           
+      <div class="row">
+    <div class="col s12">  <input type="text" name="search" id="search" class="form-control" placeholder="Buscar en el menu" /></div>
+     </div>
             <div class="row">
               <div class="row">
                  <div class="col s12"><h5>Pizzas</h5></div>
                    </div>
-                    <div class="row">
-                          @foreach($pizzas as $p)
-                        <div class="col s4">
-                            <div class="card">
-                                <div class="card-image">
-                                  @php
-                                    $link = $p->productos[0]->image;
-                                @endphp
-                                  <img src="{{ asset("img/pizza.png") }}"/>
-                                    <a id={{$p->id}} class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
-                                </div>
-                                <div class="card-content card-contentPizza">
-                                    <span class="card-title">{{$p->nombre}}</span>
-                                    <p>{{$p->descripcion}} </p>
-                                    <div class="row">
-                                        <div class="input-field col s12"> 
-                                            <select id="producto{{ $p->id }}">
-                                                <option value="" disabled>Tamaño</option>
-                                                @foreach($p->productos->where('disponible', '1') as $t)
-                                                <option  selected value="{{$t->id}}">{{$t->tamaño}} {{$t->precio}}$</option>
-                                                  @endforeach
-                                            </select>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                          @endforeach
+                    <div id="total_records" class="row">
+           
                        </div>
 
                     <div class="row">
                       <div class="col s12"><h5>Bebidas</h5>
                       </div>
                       </div>
-                    <div class="row">
-                        @foreach($bebidas as $b)
-                        <div class="col s4">
-                            <div class="card">
-                                <div class="card-image Bebida">
-                                     @php
-                                    $link = $b->image;
-                                @endphp
-                                  <img src="{{  asset("img/pepsi.png") }}"/>                                    <a href="{{route('pedidos.add', ['id' => $b->id])}}"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-title">{{$b->nombre}}</span>
-                                    <p>{{$b->precio}}$</p>
-                                </div>
-                            </div>
-                        </div>
-                         @endforeach
+                    <div class="row" id="total_records2">
+                      
                     </div>
          
             </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
    <script type="text/javascript">
 
-       $(".add").on('click', function postinput(event){
-        event.preventDefault();
+                 $(document).ready(function(){
 
+         fetch_customer_data();
+
+
+         function fetch_customer_data(query = '')
+         {
+
+          $.ajax({
+           url:"{{ route('productos.buscar') }}",
+           type:'GET',
+           data:{query:query},
+           success:function(data)
+           {
+            $('#total_records').html(data.pizza_data);
+            $('#total_records2').html(data.bebida_data);
+
+            $('select').formSelect();
+           }
+          })
+         }
+
+         $(document).on('keyup', '#search', function(){
+          var query = $(this).val();
+          fetch_customer_data(query);
+         });
+
+            $(document).on('click','.add', function postinput(event){
+        event.preventDefault();
+       console.log("aca");
         var id = '#producto'+this.id;
         var producto = $(id).val() + "";
         var urlText = "{{route('pedidos.add', ['id' => ":producto"])}}";
@@ -108,10 +96,41 @@
             producto:producto,
           },
           success:function(response){
-          window.location.href = "pedido";
+            window.location.href = "pedido";
           },
          });
         });
 
-      </script>
+        });
+
+       function selectPizza(){
+        var x = document.getElementById("selectPizza");
+        var tipo = document.getElementById("tipo");
+
+        
+       
+        if (tipo.value === "pizza") {
+                x.style.display = "block";
+        } else {
+                x.style.display = "none";
+        }
+       
+       var y = document.getElementById("selectPizzaT");
+
+        if (tipo.value === "pizza") {
+                y.style.display = "block";
+        } else {
+                y.style.display = "none";
+        }
+
+       
+   }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+
+            
+        }); 
+
+    </script> 
 @endsection

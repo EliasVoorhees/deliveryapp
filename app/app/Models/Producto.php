@@ -18,6 +18,7 @@ class Producto extends Model
         'image',
         'tamaño',
         'pizza_id',
+        'orden',
     ];
 
     public function pedidos(){

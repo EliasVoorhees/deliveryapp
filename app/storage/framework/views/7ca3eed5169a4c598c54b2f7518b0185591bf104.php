@@ -15,6 +15,7 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+
 </head>
 <body>
     <!--Navbar-->
@@ -64,32 +65,11 @@
     </footer> 
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="<?php echo e(asset("js/materialize.min.js")); ?>"></script>
-    <script>
+    
 
-       function selectPizza(){
-        var x = document.getElementById("selectPizza");
-        var tipo = document.getElementById("tipo");
-
-        
-       
-        if (tipo.value === "pizza") {
-                x.style.display = "block";
-        } else {
-                x.style.display = "none";
-        }
-       
-       var y = document.getElementById("selectPizzaT");
-
-        if (tipo.value === "pizza") {
-                y.style.display = "block";
-        } else {
-                y.style.display = "none";
-        }
+   <script type="text/javascript">
 
        
-   }
-
         document.addEventListener('DOMContentLoaded', function() {
             M.AutoInit();
 
@@ -97,7 +77,7 @@
         }); 
 
     </script> 
-
+<script type="text/javascript" src="<?php echo e(asset("js/materialize.min.js")); ?>"></script>
 
 </body>
 </html><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/layouts/app.blade.php ENDPATH**/ ?>

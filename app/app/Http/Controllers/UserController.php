@@ -74,7 +74,14 @@ class UserController extends Controller
 
 
       if($request->type == "pizza"){
-         
+          
+    
+       if( Producto::where('pizza_id', $request->pizza)->where('tamaño',$request->size)->get()->isNotEmpty()){
+         Alert::error('Error','Ya existe ese tamaño para esa pizza');
+        return redirect()->route('admin.createProduct')->withInput();
+             
+       }
+
          $producto = new Producto();
 
         $producto->nombre = $request->nombre;
@@ -84,7 +91,7 @@ class UserController extends Controller
         $producto->precio = $request->precio;
         $producto->pizza_id = $request->pizza;
         $producto->tamaño = $request->size;
-
+        $producto->orden = Producto::all()->max('orden') + 1;
     
         if ($request->hasFile('image')) {
            
@@ -102,8 +109,8 @@ class UserController extends Controller
         $producto->save();
         
        
-        Alert::success('Producto creado con exito');
-        return redirect()->route('users.index');
+         Alert::success('Producto creado con exito');
+        return redirect()->route('productos.lista');
 
       }
       else{
@@ -131,12 +138,12 @@ class UserController extends Controller
           
        
         }
-
+        $producto->orden = Producto::all()->max('orden') + 1;
         $producto->save();
         
        
         Alert::success('Producto creado con exito');
-        return redirect()->route('users.index');
+       return redirect()->route('productos.lista');
 
       }
 
@@ -159,11 +166,12 @@ class UserController extends Controller
         $pizza->nombre = $request->nombre;
         $pizza->descripcion = $request->descripcion;
         $pizza->disponible = $request->available;
+        $pizza->orden = Pizza::all()->max('orden') + 1;
         $pizza->save();
         
        
         Alert::success('Pizza creada con exito, debes agregarle productos');
-        return redirect()->route('users.index');
+        return redirect()->route('productos.lista');
 
      
        

@@ -23,7 +23,9 @@
             </div>  </div>
                 <div class="row">
    <div class="col s12">
-                <span class="card-title"><a class="waves-effect waves-light btn-small green darken-1" href="<?php echo e(route('admin.createPizza')); ?>"> Crear Pizza </a> <a class="waves-effect waves-light btn-small green darken-1" href = "<?php echo e(route('admin.createProduct')); ?>"> Crear Producto </a> </span> 
+                <span class="card-title">
+                 <a class="waves-effect waves-light btn-small green darken-1" href = "<?php echo e(route('productos.lista')); ?>"> Lista de Productos </a>
+              <a class="waves-effect waves-light btn-small green darken-1" href = "<?php echo e(route('pedidos.historial')); ?>"> Lista de Pedidos </a></span> 
        </div>
         </div>
 
@@ -46,21 +48,31 @@
                                 <table class="centered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Email</th>
                                             <th>Rol</th>
+                                            <th>Estado</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                         <?php
+                                         if($user->activo)
+                                            $estado='Activo';
+                                         else
+                                          $estado='Inactivo';
+                                          if($user->tipo=='repartidor')
+                                            $tipo='Repartidor';
+                                         else
+                                          $tipo='Administrador';
+                                         ?>
                                         <tr>
-                                            <td><?php echo e($user->id); ?></td>
                                             <td><?php echo e($user->name); ?></td>
                                             <td><?php echo e($user->email); ?></td>
-                                            <td><?php echo e($user->tipo); ?></td>
+                                            <td><?php echo e($tipo); ?></td>
+                                            <td><?php echo e($estado); ?></td>
                                             <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                              <?php if($user->activo): ?>
                                             <td><a  href="<?php echo e(route('users.activo', ['id' => $user->id])); ?>" class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">person_remove</i></a></td>
