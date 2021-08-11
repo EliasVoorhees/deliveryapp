@@ -49,6 +49,7 @@
                 <option  value="En Proceso">En Proceso</option>
              <option value="En Camino">En Camino</option>
              <option value="Entregado">Entregado</option>
+               <option value="Cancelado">Cancelado</option>
                 </select></div>
           <div class="col s2">  <input type="text" name="desde" id="desde" class="datepicker" placeholder="Desde" /></div>
             <div class="col s2">  <input type="text" name="hasta" id="hasta" class="datepicker" placeholder="Hasta" /></div>

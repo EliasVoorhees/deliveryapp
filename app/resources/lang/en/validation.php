@@ -97,7 +97,7 @@ return [
     'numeric' => 'El campo :attribute debe ser numérico.',
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
-    'regex' => 'La :attribute debe contener letras.',
+    'regex' => 'El campo :attribute debe contener letras.',
     'required' => 'El campo :attribute es obligatorio.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',

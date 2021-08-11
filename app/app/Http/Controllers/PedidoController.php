@@ -50,7 +50,7 @@ class PedidoController extends Controller
       $query = $request->get('query');
       if($query != '')
       {
-        $data= Pedido::orderByDesc('created_at')->where('estado', 'En Camino')->orwhere('estado', 'Entregado')->orwhere('estado', 'En Proceso')->get();
+         $data= Pedido::orderByDesc('created_at')->where('estado', '!=', '')->get();
          
       }
       else
@@ -125,7 +125,7 @@ class PedidoController extends Controller
           <td>'.$hora.'</td>
          <td>'.$row->total_precio.'$</td>
          <td><a id="'.$row->id.'"style="margin-right: 10px;" class="detalles waves-effect waves-light btn-small green darken-1"><i class="material-icons">add_circle_outline</i></a>
-      <a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a>
+      <a href='.route('pedidos.editar', ['id' => $row->id]).' class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a>
              </td>
                 </tr>
             <tr style="display:none; text-align: left;" id="pedidoD'.$row->id.'">
@@ -191,6 +191,17 @@ class PedidoController extends Controller
 
     }
 
+      public function editar(Request $request,$id){
+        
+        $request->session()->forget('pedido');
+        $pedido = Pedido::find($id);
+        $request->session()->put('pedido', $pedido );
+
+       return view('pedidos.editar',compact('pedido'));
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -242,7 +253,7 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
             $validated = $request->validate([
-                'nombre' => 'required|max:255|alpha',
+                'nombre' => 'required|max:255|regex:/^.(?=.*[a-zA-Z]).+$/',
                 'telefono' => 'required|digits:11|numeric|gt:0',
                 'direccion' => 'required|max:255|regex:/^.(?=.*[a-zA-Z]).+$/',
             ]);
@@ -278,6 +289,46 @@ class PedidoController extends Controller
 
 
             return redirect("/");
+            //
+    }
+
+     public function storeEdit(Request $request)
+    {
+            $validated = $request->validate([
+                'nombre' => 'required|max:255|regex:/^.(?=.*[a-zA-Z]).+$/',
+                'telefono' => 'required|digits:11|numeric|gt:0',
+                'direccion' => 'required|max:255|regex:/^.(?=.*[a-zA-Z]).+$/',
+            ]);
+          
+            $pedido = Session::get('pedido');
+            if($pedido->pedido_detalle->isEmpty()) return redirect()->route('pedidos.editar');
+            $pedido->nombre_cliente = $request->nombre;
+            $pedido->numero_contacto = $request->telefono;
+            $pedido->direccion = $request->direccion;
+            $pedido->estado = $request->estado;
+            $pedido->total_precio =  $pedido->total_precio;
+            //$pedido->numero_pedido =  strval($pedido->id);
+             $pedido->save();
+
+
+            $pedido_detalle = $pedido->pedido_detalle ;
+        
+           foreach ($pedido_detalle as $producto) {
+               $comentario = 'comentario'.$producto->id;
+               $producto->comentarios=$request->input($comentario);
+               $producto->save();
+           }
+
+            $pedido->refresh();
+
+            $pedido->save();
+
+            Alert::success('Pedido editado con exito');
+
+
+            $request->session()->forget('pedido');
+
+            return redirect()->route('pedidos.historial');
             //
     }
 
@@ -370,6 +421,27 @@ class PedidoController extends Controller
         $request->session()->put('pedido', $pedido );
         return redirect()->route('pedidos.index');
     }
+
+      public function addProductoE(Request $request, $id){
+
+  
+        $producto = Producto::find($id);
+        $pedido = Session::has('pedido') ? Session::get('pedido') : null;
+       if(!Session::has('pedido')){$pedido = new Pedido();$pedido->save();}
+        $pedido->add($producto, $producto->id);
+        $request->session()->put('pedido', $pedido );
+        return redirect()->back()->withInput();
+    }
+
+    public function restarE(Request $request, $id){
+        $producto = Producto::find($id);
+        $pedido = Session::has('pedido') ? Session::get('pedido') : null;
+       if(!Session::has('pedido')){$pedido = new Pedido();$pedido->save();}
+        $pedido->restar($producto, $producto->id);
+        $request->session()->put('pedido', $pedido );
+        return redirect()->back()->withInput();
+    }
+
 
   
 
