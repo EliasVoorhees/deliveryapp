@@ -35,6 +35,7 @@ class Pedido_Detalle extends Model
         $this->save(); 
     }
 
+
     public function pedido(){
         return $this->belongsTo(Pedido::class);
     }

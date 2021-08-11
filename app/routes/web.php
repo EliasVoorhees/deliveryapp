@@ -74,11 +74,15 @@ Route::prefix('pedido')->group(function (){
      Route::get("/descargar", [PedidoController::class, 'descargar'])->name('pedidos.descargar')->middleware('admin');
     Route::get("/create", [PedidoController::class, 'create'])->name('pedidos.create');
     Route::post("/store",  [PedidoController::class, 'store'])->name('pedidos.store');
+     Route::post("/storeEdit",  [PedidoController::class, 'storeEdit'])->name('pedidos.storeEdit')->middleware('admin');
+     Route::get("/editar/{id}",  [PedidoController::class, 'editar'])->name('pedidos.editar')->middleware('admin');
 Route::post("/consultar",  [PedidoController::class, 'consultar'])->name('pedidos.consultar');
 Route::post("/crearSession",  [PedidoController::class, 'crearSession'])->name('pedidos.crearSession');
     Route::get("/{id}",  [PedidoController::class, 'show'])->name('pedidos.show');
     Route::get("/add/{id}",  [PedidoController::class, 'addProducto'])->name('pedidos.add');
     Route::get("/restar/{id}",  [PedidoController::class, 'restar'])->name('pedidos.restar');
+  Route::get("/addE/{id}",  [PedidoController::class, 'addProductoE'])->name('pedidos.addE');
+  Route::get("/restarE/{id}",  [PedidoController::class, 'restarE'])->name('pedidos.restarE');
     Route::get("/edit/{id}",  [PedidoController::class, 'edit'])->middleware(['admin', 'repartidor'])->name('pedidos.edit');
     Route::post("/update/{id}",  [PedidoController::class, 'update'])->middleware(['admin', 'repartidor'])->name('pedidos.update');
     Route::get("/delete/{id}",  [PedidoController::class, 'delete'])->name('pedidos.destroy')->middleware('admin');
