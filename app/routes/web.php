@@ -53,8 +53,13 @@ Route::prefix('users')->middleware('admin')->group(function (){
 });
 
 Route::get("/menu", [ProductoController::class, 'index'])->name('productos.index');
+Route::get("/buscar", [ProductoController::class, 'buscar'])->name('productos.buscar');
 
-Route::prefix('menu')->middleware('admin')->group(function (){
+Route::prefix('producto')->middleware('admin')->group(function (){
+
+Route::get("/lista", [ProductoController::class, 'lista'])->name('productos.lista');
+Route::get("/ordenar",  [ProductoController::class, 'ordenar'])->name('productos.ordenar');
+Route::get("/ordenarB",  [ProductoController::class, 'ordenarB'])->name('productos.ordenarB');
     Route::get("/create", [ProductoController::class, 'create'])->name('productos.create');
     Route::post("/store",  [ProductoController::class, 'store'])->name('productos.store');
     Route::get("/{id}",  [ProductoController::class, 'show'])->name('productos.show');
@@ -62,9 +67,11 @@ Route::prefix('menu')->middleware('admin')->group(function (){
     Route::post("/update/{id}",  [ProductoController::class, 'update'])->name('productos.update');
     Route::get("/delete/{id}",  [ProductoController::class, 'delete'])->name('productos.destroy');
 });
-
 Route::prefix('pedido')->group(function (){
     Route::get("/", [PedidoController::class, 'index'])->name('pedidos.index');
+    Route::get("/historial", [PedidoController::class, 'historial'])->name('pedidos.historial')->middleware('admin');
+    Route::get("/buscar", [PedidoController::class, 'buscar'])->name('pedidos.buscar')->middleware('admin');
+     Route::get("/descargar", [PedidoController::class, 'descargar'])->name('pedidos.descargar')->middleware('admin');
     Route::get("/create", [PedidoController::class, 'create'])->name('pedidos.create');
     Route::post("/store",  [PedidoController::class, 'store'])->name('pedidos.store');
 Route::post("/consultar",  [PedidoController::class, 'consultar'])->name('pedidos.consultar');

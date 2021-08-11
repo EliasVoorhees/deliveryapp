@@ -15,7 +15,7 @@ class Pedido extends Model
       protected $fillable = [
         'nombre_cliente',
         'numero_contacto',
-        'repatidor_id',
+        'repartidor_id',
         'estado',
         'hora_entrega',
         'total_precio',
@@ -31,8 +31,8 @@ class Pedido extends Model
         return $this->hasMany(Pedido_Detalle::class);
     }
 
-     public function repatidor(){
-        return $this->belongsTo(User::class, 'repatidor_id');
+     public function repartidor(){
+        return $this->belongsTo(User::class, 'repartidor_id');
     }
 
       public function add($item, $id){

@@ -27,74 +27,62 @@
                     </form>
             
             </div>
-           
+      <div class="row">
+    <div class="col s12">  <input type="text" name="search" id="search" class="form-control" placeholder="Buscar en el menu" /></div>
+     </div>
             <div class="row">
               <div class="row">
                  <div class="col s12"><h5>Pizzas</h5></div>
                    </div>
-                    <div class="row">
-                          <?php $__currentLoopData = $pizzas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $p): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col s4">
-                            <div class="card">
-                                <div class="card-image">
-                                  <?php
-                                    $link = $p->productos[0]->image;
-                                ?>
-                                  <img src="<?php echo e(asset("img/pizza.png")); ?>"/>
-                                    <a id=<?php echo e($p->id); ?> class="add btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
-                                </div>
-                                <div class="card-content card-contentPizza">
-                                    <span class="card-title"><?php echo e($p->nombre); ?></span>
-                                    <p><?php echo e($p->descripcion); ?> </p>
-                                    <div class="row">
-                                        <div class="input-field col s12"> 
-                                            <select id="producto<?php echo e($p->id); ?>">
-                                                <option value="" disabled>Tamaño</option>
-                                                <?php $__currentLoopData = $p->productos->where('disponible', '1'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $t): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <option  selected value="<?php echo e($t->id); ?>"><?php echo e($t->tamaño); ?> <?php echo e($t->precio); ?>$</option>
-                                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </select>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div id="total_records" class="row">
+           
                        </div>
 
                     <div class="row">
                       <div class="col s12"><h5>Bebidas</h5>
                       </div>
                       </div>
-                    <div class="row">
-                        <?php $__currentLoopData = $bebidas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="col s4">
-                            <div class="card">
-                                <div class="card-image Bebida">
-                                     <?php
-                                    $link = $b->image;
-                                ?>
-                                  <img src="<?php echo e(asset("img/pepsi.png")); ?>"/>                                    <a href="<?php echo e(route('pedidos.add', ['id' => $b->id])); ?>"  class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">shopping_cart</i></a>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-title"><?php echo e($b->nombre); ?></span>
-                                    <p><?php echo e($b->precio); ?>$</p>
-                                </div>
-                            </div>
-                        </div>
-                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <div class="row" id="total_records2">
+                      
                     </div>
          
             </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
    <script type="text/javascript">
 
-       $(".add").on('click', function postinput(event){
-        event.preventDefault();
+                 $(document).ready(function(){
 
+         fetch_customer_data();
+
+
+         function fetch_customer_data(query = '')
+         {
+
+          $.ajax({
+           url:"<?php echo e(route('productos.buscar')); ?>",
+           type:'GET',
+           data:{query:query},
+           success:function(data)
+           {
+            $('#total_records').html(data.pizza_data);
+            $('#total_records2').html(data.bebida_data);
+
+            $('select').formSelect();
+           }
+          })
+         }
+
+         $(document).on('keyup', '#search', function(){
+          var query = $(this).val();
+          fetch_customer_data(query);
+         });
+
+            $(document).on('click','.add', function postinput(event){
+        event.preventDefault();
+       console.log("aca");
         var id = '#producto'+this.id;
         var producto = $(id).val() + "";
         var urlText = "<?php echo e(route('pedidos.add', ['id' => ":producto"])); ?>";
@@ -108,11 +96,42 @@
             producto:producto,
           },
           success:function(response){
-          window.location.href = "pedido";
+            window.location.href = "pedido";
           },
          });
         });
 
-      </script>
+        });
+
+       function selectPizza(){
+        var x = document.getElementById("selectPizza");
+        var tipo = document.getElementById("tipo");
+
+        
+       
+        if (tipo.value === "pizza") {
+                x.style.display = "block";
+        } else {
+                x.style.display = "none";
+        }
+       
+       var y = document.getElementById("selectPizzaT");
+
+        if (tipo.value === "pizza") {
+                y.style.display = "block";
+        } else {
+                y.style.display = "none";
+        }
+
+       
+   }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+
+            
+        }); 
+
+    </script> 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\deliveryapp\app\resources\views/welcome.blade.php ENDPATH**/ ?>

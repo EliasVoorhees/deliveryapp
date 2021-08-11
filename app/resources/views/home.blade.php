@@ -22,7 +22,9 @@
             </div>  </div>
                 <div class="row">
    <div class="col s12">
-                <span class="card-title"><a class="waves-effect waves-light btn-small green darken-1" href="{{route('admin.createPizza')}}"> Crear Pizza </a> <a class="waves-effect waves-light btn-small green darken-1" href = "{{route('admin.createProduct')}}"> Crear Producto </a> </span> 
+                <span class="card-title">
+                 <a class="waves-effect waves-light btn-small green darken-1" href = "{{route('productos.lista')}}"> Lista de Productos </a>
+              <a class="waves-effect waves-light btn-small green darken-1" href = "{{route('pedidos.historial')}}"> Lista de Pedidos </a></span> 
        </div>
         </div>
 
@@ -45,21 +47,31 @@
                                 <table class="centered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Nombre</th>
                                             <th>Email</th>
                                             <th>Rol</th>
+                                            <th>Estado</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($users as $user)
+                                         @php
+                                         if($user->activo)
+                                            $estado='Activo';
+                                         else
+                                          $estado='Inactivo';
+                                          if($user->tipo=='repartidor')
+                                            $tipo='Repartidor';
+                                         else
+                                          $tipo='Administrador';
+                                         @endphp
                                         <tr>
-                                            <td>{{$user->id}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            <td>{{$user->tipo}}</td>
+                                            <td>{{$tipo}}</td>
+                                            <td>{{$estado}}</td>
                                             <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                              @if($user->activo)
                                             <td><a  href="{{route('users.activo', ['id' => $user->id])}}" class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">person_remove</i></a></td>

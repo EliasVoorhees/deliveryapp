@@ -12,6 +12,7 @@ class Pizza extends Model
         'nombre',
         'descripcion',
         'disponible',
+        'orden',
     ];
     use HasFactory;
 

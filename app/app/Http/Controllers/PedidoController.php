@@ -9,6 +9,8 @@ use Auth;
 use App\Models\Producto;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
+use App\Exports\PedidosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PedidoController extends Controller
 {
@@ -28,6 +30,150 @@ class PedidoController extends Controller
 
       return view('manageOrder',compact('pendientes','encamino','entregadas'));
     }
+
+    public function historial()
+    {
+        
+      $pedidos= Pedido::orderByDesc('created_at')->where('estado', 'En Camino')->orwhere('estado', 'Entregado')->orwhere('estado', 'En Proceso');
+
+           $pedidos =  $pedidos->get();
+  
+      return view('pedidos.historial',compact('pedidos'));
+    }
+
+     public function buscar(Request $request)
+    {
+
+      $total = 0;
+      $output = '';
+      $output2 = '';
+      $query = $request->get('query');
+      if($query != '')
+      {
+        $data= Pedido::orderByDesc('created_at')->where('estado', 'En Camino')->orwhere('estado', 'Entregado')->orwhere('estado', 'En Proceso')->get();
+         
+      }
+      else
+      {
+         $data= Pedido::orderByDesc('created_at')->where('estado', '!=', '');
+         $desde = Carbon::parse($request->get('desde'))->toDateString();
+         $hasta = Carbon::parse($request->get('hasta'))->toDateString();
+
+         if( $request->get('numero'))
+             $data = $data->where('numero_pedido', $request->get('numero'));
+  
+         if( $request->get('estado'))
+             $data = $data->where('estado', $request->get('estado'));
+
+         if( $request->get('desde'))
+             $data = $data->whereDate('created_at', '>=', $desde);
+
+          if( $request->get('hasta'))
+             $data = $data->whereDate('created_at', '<=', $hasta);
+
+         if( $request->get('repartidor')){
+            $repartidor = $request->get('repartidor');
+               $data = $data->whereHas('repartidor', function($q)  use($repartidor) {
+                $q->where('name', 'like', '%'.$repartidor.'%');
+                 });
+          }
+
+
+        $data =  $data->get();
+         
+      }
+         
+      $total_row = $data->count();
+      if($total_row > 0)
+      {
+       foreach($data as $row)
+       {
+        $total += $row->total_precio;
+        $items = '';
+        $repatidor = '';
+        $hora = '';
+        if($row->repartidor)$repatidor=$row->repartidor->name;
+        if($row->hora_entrega)$hora = Carbon::parse($row->hora_entrega)->format('j F, Y g:i A');
+        $horaP = Carbon::parse($row->created_at)->format('j F, Y g:i A');
+        foreach($row->pedido_detalle as $detalles)
+         {
+         $items .= '
+                  <tr>
+
+                <td class="producto">'.$detalles->producto->nombre.'
+                </td>
+                <td class="producto">'.$detalles->producto->descripcion.'</td>
+                    <td>       
+                 <div style="padding:0 50px 0 50px">
+                 <input disabled value="'.$detalles->comentarios.'"type="text" class="form-control">
+                    </div> 
+                </td>
+              <td class="cantidad">
+               <div>'.$detalles->cantidad.' </div>
+                     </td>
+                    <td>'.$detalles->precio.'$ </td>
+                                            </tr>';
+         }
+       
+        $output .= '
+          <tr>
+         <td>'. $row->numero_pedido .'</td>
+         <td>'.$row->nombre_cliente.' </td>
+         <td>'.$row->estado.'</td>
+         <td> '.$repatidor.'</td>
+         <td>'.$horaP.'</td>
+          <td>'.$hora.'</td>
+         <td>'.$row->total_precio.'$</td>
+         <td><a id="'.$row->id.'"style="margin-right: 10px;" class="detalles waves-effect waves-light btn-small green darken-1"><i class="material-icons">add_circle_outline</i></a>
+      <a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a>
+             </td>
+                </tr>
+            <tr style="display:none; text-align: left;" id="pedidoD'.$row->id.'">
+         <td style="text-align: left;" colspan="2"><b>Número de contacto:&nbsp  </b> 
+         '.$row->numero_contacto.'</td>
+        <td style="text-align: left;" colspan="3"><b>Dirección:  &nbsp </b> 
+        '.$row->direccion.'</td>
+            </tr>
+         <tr style="display:none;" id="pedido'.$row->id.'"><td></td>
+                <td colspan="5"> <table class="centered">
+                   <thead>
+                   <tr>
+                  <th class="producto" >Producto</th>
+                    <th class="producto">Descripción</th>
+                    <th>Comentarios</th>
+                     <th>Cantidad</th>
+                     <th>Precio</th>
+                        </tr>
+                        </thead>
+                     <tbody>
+        '.$items.' </tbody>
+           </table> 
+                <br>
+             <div style="text-align:right;font-size: 20px;">
+        <b>Total:</b> '.$row->total_precio.'$</div>
+                                </td>
+                                </tr>
+                                
+        ';
+       }
+      }
+       $output2 .= '<b>Total:&nbsp</b>'.$total.'$';
+       
+     return response()->json(['pedidos_data'=> $output, 'total'=> $output2  ]);
+     
+    }
+
+     public function descargar(Request $request)
+    {
+        $numero = $request->get('numero');
+        $estado = $request->get('estado');
+        $desde = $request->get('desde');
+        $hasta = $request->get('hasta');
+        $repartidor = $request->get('repartidor');
+      return (new PedidosExport($numero,$estado,$desde,$hasta,$repartidor))->download('Pedidos.xlsx');
+     
+    }
+
 
 
 
@@ -96,9 +242,9 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
             $validated = $request->validate([
-                'nombre' => 'required|max:255',
-                'telefono' => 'required|numeric|max:255',
-                'direccion' => 'required|max:255',
+                'nombre' => 'required|max:255|alpha',
+                'telefono' => 'required|digits:11|numeric|gt:0',
+                'direccion' => 'required|max:255|regex:/^.(?=.*[a-zA-Z]).+$/',
             ]);
           
             $pedido = Session::get('pedido');

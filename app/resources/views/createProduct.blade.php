@@ -10,6 +10,11 @@
                 @endif
 
        <br>
+       <div class="row">
+              <div class="col s12">
+                <span class="card-title"><a class="waves-effect waves-light btn-small green darken-1" href="{{route('productos.lista')}}"> Volver </a>  </div>
+        </div>
+
             <div class="row">
                 <div class="col s12">
                     <div class="card blue-grey darken-1">
@@ -38,34 +43,34 @@
 
                             <label>
                                <b> Nombre del Producto </b>
-                                <input type= "text" name ="nombre" required> </input>
+                                <input value= "{{old('nombre')}}" type= "text" name ="nombre" required> </input>
                             </label>
                             <br> <br>
                             <label>
                                <b> Descripción del Producto </b>
                                <br> <br>
-                                <textarea name ="descripcion" required> </textarea>
+                                <textarea  name ="descripcion" required>{{old('descripcion')}} </textarea>
                             </label>        
                             <br> <br>
                             <label>
                                <b> Tipo de Producto </b>
                                <select name="type" id="tipo" onchange="selectPizza()">
-                                <option value="pizza">Pizza</option>
-                                <option value="bebida">Bebida</option>
+                                <option {{ old('type') == "pizza"  ? 'selected' : '' }} value="pizza">Pizza</option>
+                                <option {{ old('type') == "bebida"  ? 'selected' : '' }} value="bebida">Bebida</option>
                                 </select>
                             </label>
                             <br> 
                             <label>
                                <b> Precio del Producto </b>
-                                <input step="any" type= "number" name ="precio" required> </input>
+                                <input value= "{{old('precio')}}" step="any" type= "number" name ="precio" required> </input>
                             </label>
                             <br> <br>
                             <label id="selectPizzaT">
                                <b> Tamaño de la Pizza </b>
                                <select name="size">
-                                <option value="Pequeña">Pequeña</option>
-                                <option value="Mediana">Mediana</option>
-                                <option value="Grande">Grande</option>
+                                <option {{ old('size') == "Pequeña"  ? 'selected' : '' }}  value="Pequeña">Pequeña</option>
+                                <option {{ old('size') == "Mediana"  ? 'selected' : '' }} value="Mediana">Mediana</option>
+                                <option {{ old('size') == "Grande"  ? 'selected' : '' }} value="Grande">Grande</option>
                                 </select>
                             </label>
                             <br> 
@@ -77,8 +82,8 @@
                                 <label>
                             <b> ¿Producto disponible? </b>         </label>
                                  <select name="available">
-                                            <option value="1">Si</option>
-                                            <option value="2">No</option>
+                                    <option {{  old('available') == "1"  ? 'selected' : '' }}   value="1">Si</option>
+                                      <option {{  old('available') == "2"  ? 'selected' : '' }}  value="2">No</option>
                                         </select>
                      
                             <br> 
@@ -87,7 +92,7 @@
                             <b> Agregar a Pizza </b>         </label>
                              <select name="pizza">
                                 @foreach($pizzas as $pizza)
-                                <option value="{{$pizza->id}}">{{$pizza->nombre}}</option>
+                                <option {{ old('pizza') == $pizza->id  ? 'selected' : '' }}  value="{{$pizza->id}}">{{$pizza->nombre}}</option>
                                @endforeach
                             </select>
                             </div>
@@ -102,6 +107,35 @@
                 </div>
             </div>
 
+   <script type="text/javascript">
+
+        selectPizza();
+       function selectPizza(){
+        var x = document.getElementById("selectPizza");
+        var tipo = document.getElementById("tipo");
+
+        
+       
+        if (tipo.value === "pizza") {
+                x.style.display = "block";
+        } else {
+                x.style.display = "none";
+        }
+       
+       var y = document.getElementById("selectPizzaT");
+
+        if (tipo.value === "pizza") {
+                y.style.display = "block";
+        } else {
+                y.style.display = "none";
+        }
+
+       
+   }
+
+
+
+    </script> 
                 
 
 

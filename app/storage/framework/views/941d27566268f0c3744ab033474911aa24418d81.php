@@ -17,6 +17,12 @@
         </div>
     <?php endif; ?>
 
+    <div class="row">
+   <div class="col s12">
+                <span class="card-title"><a class="waves-effect waves-light btn-small green darken-1" href="<?php echo e(route('home')); ?>"> Volver </a> 
+        </div>
+ </div>
+
             <div class="row">
                 <div class="col s8 offset-s2">
                     <div class="card-panel green lighten-5">
@@ -25,11 +31,11 @@
                                    <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="input-field col s6">
-                                        <input name="nombre" id="nombre" type="text" class="validate">
+                                        <input  value= "<?php echo e(old('nombre')); ?>" name="nombre" id="nombre" type="text" class="validate">
                                         <label for="nombre">Nombre</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input  name="email" id="email" type="email" class="validate">
+                                        <input value= "<?php echo e(old('email')); ?>" name="email" id="email" type="email" class="validate">
                                         <label for="email">Email</label>
                                     </div>
                                 </div>
@@ -41,8 +47,8 @@
                                      <div class="input-field col s6">
                                         <select name="tipo"  id="tipo">
                                             <option value="" disabled>Choose your option</option>
-                                            <option selected value="repartidor">Repartidor</option>
-                                            <option value="admin">Admin</option>
+                                            <option <?php echo e(old('tipo') == "repartidor"  ? 'selected' : ''); ?> value="repartidor">Repartidor</option>
+                                            <option <?php echo e(old('tipo') == "admin"  ? 'selected' : ''); ?> value="admin">Admin</option>
                                         </select>
                                         <label>Rol</label>
                                     </div>
