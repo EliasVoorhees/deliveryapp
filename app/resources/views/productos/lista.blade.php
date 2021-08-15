@@ -84,7 +84,11 @@
                                          $sum=0;
                                           $productos= App\Models\Producto::where('pizza_id', $p->id)->get();
                                           foreach($productos as $pr){
-                                              $sum+=$pr->pedidos->sum('cantidad');
+                                                foreach($pr->pedidos as $ped){
+                                                  if($ped->pedido->estado=="Entregado"){
+                                                    $sum+=$ped->cantidad;
+                                                  }
+                                                }
                                             }
 
                                           @endphp 
@@ -170,7 +174,18 @@
                                         <td>{{ $p->nombre }}</td>
                                         <td>{{  $p->descripcion  }}</td>
                                          <td>${{  $p->precio  }}</td>
-                                          <td>{{ DB::table('pedido__detalles')->where('producto_id', $p->id)->sum('cantidad') }}</td>
+                                           @php 
+                                         $sum=0;
+              
+                                                foreach($p->pedidos as $ped){
+                                                  if($ped->pedido->estado=="Entregado"){
+                                                    $sum+=$ped->cantidad;
+                                                  }
+                                                }
+                                            
+
+                                          @endphp 
+                                          <td>{{ $sum }}</td>
                                              <td>{{  $estado  }}</td>
                                            <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                       </tr>

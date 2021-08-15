@@ -102,7 +102,6 @@ class PedidoController extends Controller
 
                 <td class="producto">'.$detalles->producto->nombre.'
                 </td>
-                <td class="producto">'.$detalles->producto->descripcion.'</td>
                     <td>       
                  <div style="padding:0 50px 0 50px">
                  <input disabled value="'.$detalles->comentarios.'"type="text" class="form-control">
@@ -139,7 +138,6 @@ class PedidoController extends Controller
                    <thead>
                    <tr>
                   <th class="producto" >Producto</th>
-                    <th class="producto">Descripción</th>
                     <th>Comentarios</th>
                      <th>Cantidad</th>
                      <th>Precio</th>

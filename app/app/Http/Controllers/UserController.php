@@ -271,7 +271,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
 
-            Alert::success('El usuario ha sido agregado exitosamente');
+            Alert::success('El usuario ha sido editado exitosamente');
             return redirect('admin');
 
     }
@@ -298,7 +298,7 @@ class UserController extends Controller
     $pizza->save();
     
    
-    Alert::success('Pizza creada con exito, debes agregarle productos');
+    Alert::success('Pizza editada con exito');
     return redirect()->route('productos.lista');
         
     }
@@ -361,7 +361,7 @@ class UserController extends Controller
              $producto->save();
              
             
-              Alert::success('Producto creado con exito');
+              Alert::success('Producto editado con exito');
              return redirect()->route('productos.lista');
      
            }
@@ -394,7 +394,7 @@ class UserController extends Controller
              $producto->save();
              
             
-             Alert::success('Producto creado con exito');
+             Alert::success('Producto editado con exito');
             return redirect()->route('productos.lista');
      
            }
