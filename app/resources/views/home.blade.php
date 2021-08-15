@@ -72,7 +72,7 @@
                                             <td>{{$user->email}}</td>
                                             <td>{{$tipo}}</td>
                                             <td>{{$estado}}</td>
-                                            <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
+                                            <td><a href="{{route('users.edit',$user)}}" class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                              @if($user->activo)
                                             <td><a  href="{{route('users.activo', ['id' => $user->id])}}" class="waves-effect waves-light btn-small red darken-1"><i class="material-icons">person_remove</i></a></td>
                                             @else

@@ -69,7 +69,7 @@
                                     <tbody id="tablecontents">
                                     @foreach($pizzas as $p)
                                        @php
-                                         if($p->disponible)
+                                         if($p->disponible === 1)
                                             $estado='Disponible';
                                          else
                                           $estado='No Disponible';
@@ -90,7 +90,7 @@
                                           @endphp 
                                          <td>{{  $sum }}</td>
                                             <td>{{  $estado  }}</td>
-                                           <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
+                                           <td><a href="{{route('admin.editPizza',$p)}}" class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                   
                                        @if($p->productos->isNotEmpty()) 
                                        <td style="display:none;" id="pedido{{ $p->id }}">
@@ -102,7 +102,7 @@
                                         <tbody>
                                             @foreach($p->productos as $detalles)
                                                @php
-                                                   if($detalles->disponible)
+                                                   if($detalles->disponible === 1)
                                                       $estadod='Disponible';
                                                    else
                                                     $estadod='No Disponible';
@@ -111,7 +111,7 @@
                                                 <td>{{$detalles->tamaño}} </td>
                                                 <td>{{$detalles->precio}}$ </td>
                                                   <td>{{  $estadod  }}</td>
-                                           <td><a class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
+                                           <td><a  href="{{route('admin.editProduct',$detalles)}}" class="waves-effect waves-light btn-small green darken-1"><i class="material-icons">edit</i></a></td>
                                 
                                          
                                        @endforeach
