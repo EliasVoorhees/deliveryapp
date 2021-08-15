@@ -1,6 +1,15 @@
 
 
 <?php $__env->startSection('content'); ?>
+<style>
+
+     input {
+      color: black !important;
+    }
+
+
+
+ </style>
     <div class="container">
 
              <div class="row">

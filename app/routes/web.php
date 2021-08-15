@@ -38,6 +38,12 @@ Route::prefix('admin')->middleware('admin')->group(function (){
   Route::post('/product', [UserController::class, 'storeProduct'])->name('admin.storeProduct');
   Route::get('/createPizza', [UserController::class, 'createPizza'])->name('admin.createPizza');  
   Route::post('/pizza', [UserController::class, 'storePizza'])->name('admin.storePizza');
+  Route::get('/createPizza', [UserController::class, 'createPizza'])->name('admin.createPizza');  
+  Route::post('/pizza', [UserController::class, 'storePizza'])->name('admin.storePizza');
+  Route::get('/editPizza/{id}', [UserController::class, 'editPizza'])->name('admin.editPizza');  
+  Route::get('/editProduct/{id}', [UserController::class, 'editProduct'])->name('admin.editProduct');  
+  Route::post('/updatePizza/{pizza}', [UserController::class, 'updatePizza'])->name('admin.updatePizza');  
+  Route::post('/updateProduct/{producto}', [UserController::class, 'updateProducto'])->name('admin.updateProduct');  
 
 });
 
@@ -46,8 +52,8 @@ Route::prefix('users')->middleware('admin')->group(function (){
     Route::get("/create", [UserController::class, 'create'])->name('users.create');
     Route::post("/store",  [UserController::class, 'store'])->name('users.store');
     Route::get("/{id}",  [UserController::class, 'show'])->name('users.show');
-    Route::get("/edit/{id}",  [UserController::class, 'edit'])->name('users.edit');
-    Route::post("/update/{id}",  [UserController::class, 'update'])->name('users.update');
+    Route::get("/edit/{user}",  [UserController::class, 'edit'])->name('users.edit');
+    Route::post("/update/{user}",  [UserController::class, 'update'])->name('users.update');
     Route::get("/delete/{id}",  [UserController::class, 'delete'])->name('users.destroy');
     Route::get("/activo/{id}",  [UserController::class, 'activo'])->name('users.activo');
 });
