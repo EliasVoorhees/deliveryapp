@@ -184,7 +184,7 @@ class ProductoController extends Controller
                                 </div>
                                 <div class="card-content">
                                     <span class="card-title">'.$row->nombre.'</span>
-         <p>'.$row->descripcion.'</p>
+         <p>'.$row->descripcion.' '.$row->precio.'$</p>
         </div>
         </div>
         </div>
